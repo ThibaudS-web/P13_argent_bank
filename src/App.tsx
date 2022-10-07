@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import Header from "./components/layout/Header"
+import Layout from "./components/layout/Layout"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Profil from "./pages/Profil"
@@ -8,17 +8,16 @@ import "./style/main.css"
 function App() {
 	return (
 		<>
-			<Header />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/profile" element={<Profil />} />
-			</Routes>
+			<Layout>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/profile" element={<Profil />} />
+				</Routes>
+			</Layout>
 		</>
 	)
 }
 
 export default App
-
-
 
