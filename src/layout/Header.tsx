@@ -8,7 +8,6 @@ function Header() {
 	const dispatch = useDispatch()
 	const username = useSelector(userFirstName)
 	const isConnected = useSelector(connectionState)
-	console.log(useSelector(stateGlobal))
 	
 	const handleLogOut = () => {
 		localStorage.removeItem("token")

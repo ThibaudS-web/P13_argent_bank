@@ -5,7 +5,6 @@ import { ApiResult } from "./apiResult"
 
 class FetchUserAPI {
 	BASE_URL = "http://localhost:3001/api/v1"
-	// navigate = useNavigate()
 
 	async login(email: string, password: string): Promise<Token> {
 		let data: Token
@@ -21,10 +20,8 @@ class FetchUserAPI {
 				}
 			})
 			data = ((await result.json()) as ApiResult<Token>).body
-			console.log("data", data)
 			return data
 		} catch (error) {
-			console.log(error)
 			throw new Error("Error API: ", error as Error)
 		}
 	}
@@ -42,7 +39,6 @@ class FetchUserAPI {
 			data = ((await result.json()) as ApiResult<UserAPI>).body
 			return data
 		} catch (error) {
-			console.log(error)
 			throw new Error("Error API: ", error as Error)
 		}
 	}
@@ -62,20 +58,11 @@ class FetchUserAPI {
 				})
 			})
 			data = ((await result.json()) as ApiResult<UserAPI>).body
-			console.log('data via fetcher: ', data )
 			return data
 		} catch (error) {
-			console.log(error)
 			throw new Error("Error API: ", error as Error)
 		}
 	}
-
-	//I NEED TO IMPLEMENTS THIS PAGE
-	// handleError(result: { status: number }) {
-	// 	if (result.status === 404) {
-	// 		this.navigate("/page-not-found", { replace: true })
-	// 	}
-	// }
 }
 
 export default FetchUserAPI
