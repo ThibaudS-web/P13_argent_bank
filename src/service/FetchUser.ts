@@ -1,20 +1,20 @@
 // import { useNavigate } from "react-router-dom"
 import Token from "../models/Token"
-import User from "../models/UserAPI"
+import UserAPI from "../models/UserAPI"
 import { ApiResult } from "./apiResult"
 
-class FetchUser {
+class FetchUserAPI {
 	BASE_URL = "http://localhost:3001/api/v1"
 	// navigate = useNavigate()
 
-	async login(email: string | null, password: string | null): Promise<Token> {
+	async login(email: string, password: string): Promise<Token> {
 		let data: Token
 		try {
 			const result = await fetch("http://localhost:3001/api/v1/user/login", {
 				method: "POST",
 				body: JSON.stringify({
-					email: email,
-					password: password
+					email,
+					password
 				}),
 				headers: {
 					"Content-type": "application/json; charset=UTF-8"
@@ -29,8 +29,8 @@ class FetchUser {
 		}
 	}
 
-	async getUserInfos(token: Token): Promise<User> {
-		let data: User
+	async getUserInfos(token: Token): Promise<UserAPI> {
+		let data: UserAPI
 		try {
 			const result = await fetch("http://localhost:3001/api/v1/user/profile", {
 				method: "POST",
@@ -39,7 +39,30 @@ class FetchUser {
 					"Content-type": "application/json; charset=UTF-8"
 				}
 			})
-			data = ((await result.json()) as ApiResult<User>).body
+			data = ((await result.json()) as ApiResult<UserAPI>).body
+			return data
+		} catch (error) {
+			console.log(error)
+			throw new Error("Error API: ", error as Error)
+		}
+	}
+
+	async changeUserName(firstName: string, lastName: string, token: string): Promise<UserAPI> {
+		let data: UserAPI
+		try {
+			const result = await fetch("http://localhost:3001/api/v1/user/profile", {
+				method: "PUT",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-type": "application/json; charset=UTF-8"
+				},
+				body: JSON.stringify({
+					firstName,
+					lastName
+				})
+			})
+			data = ((await result.json()) as ApiResult<UserAPI>).body
+			console.log('data via fetcher: ', data )
 			return data
 		} catch (error) {
 			console.log(error)
@@ -55,4 +78,4 @@ class FetchUser {
 	// }
 }
 
-export default FetchUser
+export default FetchUserAPI

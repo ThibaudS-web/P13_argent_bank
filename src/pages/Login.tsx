@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { logIn } from "../features/user/userSlice"
+import { updateStateLoginStatus } from "../features/user/userSlice"
 import FetchUser from "../service/FetchUser"
 
 function Login() {
@@ -14,17 +14,19 @@ function Login() {
 
 	const handleSubmit = async (event: { preventDefault: () => void }) => {
 		event.preventDefault()
-		try {
-			const token = await fetchUser.login(email, password)
-			setEmail(null)
-			setPassword(null)
-			console.log("token: ", token.token)
-			localStorage.setItem("token", token.token)
-			dispatch(logIn())
-			navigate("/profile", { replace: true })
-			return token
-		} catch (error) {
-			throw new Error("Error on Login page: ", error as Error)
+		if (email && password) {
+			try {
+				console.log(email, password)
+				const token = await fetchUser.login(email, password)
+				setEmail(null)
+				setPassword(null)
+				localStorage.setItem("token", token.token)
+				dispatch(updateStateLoginStatus(true))
+				navigate("/profile", { replace: true })
+				return token
+			} catch (error) {
+				throw new Error("Error on Login page: ", error as Error)
+			}
 		}
 	}
 
@@ -36,14 +38,18 @@ function Login() {
 				<form onSubmit={handleSubmit}>
 					<div className="input-wrapper">
 						<label htmlFor="username">Username</label>
-						<input type="text" id="username" onChange={e => setEmail(e.target.value)} />
+						<input
+							type="text"
+							id="username"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
 						<input
 							type="password"
 							id="password"
-							onChange={e => setPassword(e.target.value)}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
 					<div className="input-remember">

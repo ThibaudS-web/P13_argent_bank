@@ -31,4 +31,3 @@ export const accountText = {
 		balance: "Current Balance"
 	}
 }
-

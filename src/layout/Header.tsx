@@ -1,14 +1,20 @@
-import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import logo from "../assets/argent_bank_logo.png"
-import { connectionState } from "../features/user/selector"
-import { logOut } from "../features/user/userSlice"
+import { connectionState, userFirstName, stateGlobal } from "../features/user/selector"
+import { updateStateLoginStatus } from "../features/user/userSlice"
 
 function Header() {
 	const dispatch = useDispatch()
+	const username = useSelector(userFirstName)
 	const isConnected = useSelector(connectionState)
-	console.log('suis je connecté:', isConnected)
+	console.log(useSelector(stateGlobal))
+	
+	const handleLogOut = () => {
+		localStorage.removeItem("token")
+		dispatch(updateStateLoginStatus(false))
+	}
+
 
 	return (
 		<header>
@@ -21,9 +27,9 @@ function Header() {
 					<div>
 						<Link className="main-nav-item" to="/profile">
 							<i className="fa fa-user-circle"></i>
-							Tony
+							{username}
 						</Link>
-						<Link onClick={() => dispatch(logOut())} className="main-nav-item" to="/">
+						<Link onClick={handleLogOut} className="main-nav-item" to="/">
 							<i className="fa fa-sign-out"></i>
 							Sign Out
 						</Link>

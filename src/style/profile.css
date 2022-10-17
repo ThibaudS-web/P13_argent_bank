@@ -60,6 +60,61 @@
 	color: #fff;
 }
 
+.form-wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 23%;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.input-wrapper-name {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.input-wrapper-name > input {
+	margin-right: 20px;
+}
+
+.buttons-wrapper-name {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.buttons-wrapper-name > button {
+	margin-right: 20px;
+}
+
+.form-name-button {
+	width: 120px;
+	height: 35px;
+	background-color: white;
+	border-radius: 5px;
+	border: 2px #B3B3F0 solid;
+	color: #675AF5;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#firsName,
+#lastName {
+	margin-bottom: 15px;
+	height: 30px;
+	width: 180px;
+	padding: 5px 0 5px 10px;
+	border-radius: 5px;
+	border: 3px #B8C4CE solid;
+	font-size: 20px;
+	color: #585a5c;
+}
+
+input#firstName::placeholder {
+	color: red;
+}
+
 @media (min-width: 720px) {
 	.account {
 		flex-direction: row;

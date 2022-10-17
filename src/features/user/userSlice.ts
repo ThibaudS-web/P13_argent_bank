@@ -2,19 +2,20 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import UserState from "../../models/states/UserState"
 import FetchUser from "../../service/FetchUser"
 import Token from "../../models/Token"
-import userMapper from "../../UI/mappers/userMapper"
+import UserMapper from "../../UI/mappers/UserMapper"
+
+const fetchUser = new FetchUser()
+const tokenInLocal = !!localStorage.getItem("token")
 
 export const getUser = createAsyncThunk("user/getUser", async (token: Token) => {
-	const fetchUser = new FetchUser()
 	const response = await fetchUser.getUserInfos(token)
-	const userMapping = new userMapper(response)
-	const userMapped = userMapping.mapAPI(response)
+	const userMapped = new UserMapper().mapAPI(response)
 	console.log("user: ", userMapped)
 	return userMapped
 })
 
 const initialState: UserState = {
-	isConnected: false,
+	isConnected: tokenInLocal,
 	loaded: false,
 	userInfos: null
 }
@@ -37,19 +38,22 @@ const userSlice = createSlice({
 		})
 	},
 	reducers: {
-		logIn: (state) => {
-			console.log("Je me co")
-			state.isConnected = !state.isConnected
+		updateStateLoginStatus: (state, action) => {
+			const connected = action.payload
+			if (connected) {
+				state.isConnected = connected
+			} else {
+				state.isConnected = false
+				state.loaded = false
+				state.userInfos = null
+			}
 		},
-		logOut: (state) => {
-			console.log("Je deco")
-			state.isConnected = !state.isConnected
-			state.loaded = !state.loaded
-			state.userInfos = null		
+		changeUserName: (state, action) => {
+			state.userInfos = action.payload
 		}
 	}
 })
 
-export const { logIn, logOut } = userSlice.actions
+export const { updateStateLoginStatus, changeUserName } = userSlice.actions
 
 export default userSlice
