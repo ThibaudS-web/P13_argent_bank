@@ -1,12 +1,16 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { AppDispatch } from "../app/store"
 import { updateStateLoginStatus } from "../features/user/userSlice"
 import AuthManager from "../service/AuthManager"
 import FetchUser from "../service/FetchUser"
-import { navigate, dispatch } from "../utils/hooks"
 
 function Login() {
 	const fetchUser = new FetchUser()
 	const authManager = new AuthManager()
+	const dispatch = useDispatch<AppDispatch>()
+	const navigate = useNavigate()
 
 	const [email, setEmail] = useState<null | string>(null)
 	const [password, setPassword] = useState<null | string>(null)

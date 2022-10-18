@@ -1,17 +1,17 @@
 import Account from "../components/Account"
 import { accountText } from "../utils/staticText"
 import { useEffect, SetStateAction } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { AppDispatch } from "../app/store"
 import { getUser } from "../features/user/userSlice"
 import Token from "../models/Token"
 import { userFirstName, userLastName } from "../features/user/selector"
 import { useState } from "react"
 import UserFormName from "../components/UserFormName"
-import { dispatch } from "../utils/hooks"
 
 function Profil() {
 	const [isDisplayForm, setIsDisplayForm] = useState(false)
-
+	const dispatch = useDispatch<AppDispatch>()
 	const firstName = useSelector(userFirstName)
 	const lastName = useSelector(userLastName)
 
@@ -24,10 +24,10 @@ function Profil() {
 	const displayHandler = (isDisplayForm: SetStateAction<boolean>) => {
 		setIsDisplayForm(isDisplayForm)
 	}
-	
+
 	useEffect(() => {
 		dispatch(getUser(token))
-	}, [])
+	})
 
 	return (
 		<main className="main bg-dark">
@@ -36,7 +36,11 @@ function Profil() {
 					Welcome back
 					<br />
 					{isDisplayForm ? (
-						<UserFormName firstName={firstName} lastName={lastName} displayHandler={displayHandler} />
+						<UserFormName
+							firstName={firstName}
+							lastName={lastName}
+							displayHandler={displayHandler}
+						/>
 					) : (
 						`${firstName} ${lastName}!`
 					)}

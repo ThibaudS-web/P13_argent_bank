@@ -18,12 +18,8 @@ class AuthManager implements IAuthManager {
 		const token = this.getToken()
 		if (token) {
 			const decodedToken: { exp: number; iat: number; id: string } = jwtDecode(token)
-
 			const tokenExpireDate = new Date(decodedToken.exp * 1000)
 			const currentDate = new Date()
-
-			console.log(decodedToken)
-			console.log("current date: ", currentDate, "||", "tokenExpireDate: ", tokenExpireDate)
 
 			if (currentDate > tokenExpireDate) {
 				localStorage.removeItem("token")

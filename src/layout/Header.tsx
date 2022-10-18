@@ -4,11 +4,13 @@ import logo from "../assets/argent_bank_logo.png"
 import { connectionState, userFirstName } from "../features/user/selector"
 import { updateStateLoginStatus } from "../features/user/userSlice"
 import AuthManager from "../service/AuthManager"
-import { dispatch } from "../utils/hooks"
+import { AppDispatch } from "../app/store"
+import { useDispatch } from "react-redux"
 
 function Header() {
 	const username = useSelector(userFirstName)
 	const isConnected = useSelector(connectionState)
+	const dispatch = useDispatch<AppDispatch>()
 	const authManager = new AuthManager()
 
 	const handleLogOut = () => {

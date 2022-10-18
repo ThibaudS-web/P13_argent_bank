@@ -12,7 +12,7 @@ const authManager: IAuthManager = new AuthManager()
 export const getUser = createAsyncThunk("user/getUser", async (token: Token) => {
 	const response = await fetchUser.getUserInfos(token)
 	const userMapped = new UserMapper().mapAPI(response)
-	console.log("user: ", userMapped)
+	console.log("user mapped: ", userMapped)
 	return userMapped
 })
 
@@ -30,7 +30,6 @@ const userSlice = createSlice({
 			state.loaded = false
 		})
 		builder.addCase(getUser.fulfilled, (state, action) => {
-			console.log(action)
 			state.loaded = true
 			state.userInfos = action.payload
 		})
