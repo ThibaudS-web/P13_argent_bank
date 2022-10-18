@@ -2,12 +2,14 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { updateStateLoginStatus } from "../features/user/userSlice"
+import AuthManager from "../service/AuthManager"
 import FetchUser from "../service/FetchUser"
 
 function Login() {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const fetchUser = new FetchUser()
+	const authManager = new AuthManager()
 
 	const [email, setEmail] = useState<null | string>(null)
 	const [password, setPassword] = useState<null | string>(null)
@@ -16,11 +18,10 @@ function Login() {
 		event.preventDefault()
 		if (email && password) {
 			try {
-				console.log(email, password)
 				const token = await fetchUser.login(email, password)
 				setEmail(null)
 				setPassword(null)
-				localStorage.setItem("token", token.token)
+				authManager.setToken(token.token)
 				dispatch(updateStateLoginStatus(true))
 				navigate("/profile", { replace: true })
 				return token
