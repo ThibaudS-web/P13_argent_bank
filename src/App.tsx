@@ -6,14 +6,14 @@ import Layout from "./layout/Layout"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Profil from "./pages/Profil"
+import Error404 from "./pages/Error404"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 import { PersistGate } from "redux-persist/lib/integration/react"
-import { Provider, useSelector } from "react-redux"
-import store from "./app/store"
-import Error404 from "./pages/Error404"
+import { useSelector } from "react-redux"
 import { persistor } from "./app/store"
 import { connectionState } from "./features/user/selector"
-import ProtectedRoute from "./components/ProtectedRoute"
+
 
 function App() {
 	const isAuthenticated = useSelector(connectionState)
@@ -41,4 +41,6 @@ function App() {
 }
 
 export default App
+
+
 

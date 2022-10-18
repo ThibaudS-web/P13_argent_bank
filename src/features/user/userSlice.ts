@@ -3,9 +3,10 @@ import UserState from "../../models/states/UserState"
 import FetchUser from "../../service/FetchUser"
 import Token from "../../models/Token"
 import UserMapper from "../../UI/mappers/UserMapper"
+import checkTokenIsValidate from "../../utils/checkTokenIsValidate"
 
 const fetchUser = new FetchUser()
-const tokenInLocal = !!localStorage.getItem("token")
+const tokenInLocal = localStorage.getItem('token')
 
 export const getUser = createAsyncThunk("user/getUser", async (token: Token) => {
 	const response = await fetchUser.getUserInfos(token)
@@ -15,10 +16,11 @@ export const getUser = createAsyncThunk("user/getUser", async (token: Token) => 
 })
 
 const initialState: UserState = {
-	isConnected: tokenInLocal,
+	isConnected: checkTokenIsValidate(tokenInLocal),
 	loaded: false,
 	userInfos: null
 }
+console.log(initialState.isConnected)
 
 const userSlice = createSlice({
 	name: "user",
@@ -39,7 +41,7 @@ const userSlice = createSlice({
 	},
 	reducers: {
 		updateStateLoginStatus: (state, action) => {
-			const connected = action.payload
+			const connected: Boolean = action.payload
 			if (connected) {
 				state.isConnected = connected
 			} else {
