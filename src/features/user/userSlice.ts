@@ -3,7 +3,8 @@ import UserState from "../../models/states/UserState"
 import FetchUser from "../../service/FetchUser"
 import Token from "../../models/Token"
 import UserMapper from "../../UI/mappers/UserMapper"
-import AuthManager, { IAuthManager } from "../../service/AuthManager"
+import AuthManager from "../../service/AuthManager"
+import IAuthManager from "../../service/IAuthManager"
 
 const fetchUser = new FetchUser()
 const authManager: IAuthManager = new AuthManager()

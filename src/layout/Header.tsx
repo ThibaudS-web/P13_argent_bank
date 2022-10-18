@@ -1,21 +1,20 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import logo from "../assets/argent_bank_logo.png"
-import { connectionState, userFirstName, stateGlobal } from "../features/user/selector"
+import { connectionState, userFirstName } from "../features/user/selector"
 import { updateStateLoginStatus } from "../features/user/userSlice"
 import AuthManager from "../service/AuthManager"
+import { dispatch } from "../utils/hooks"
 
 function Header() {
-	const dispatch = useDispatch()
 	const username = useSelector(userFirstName)
 	const isConnected = useSelector(connectionState)
-	const authManager = new AuthManager
-	
+	const authManager = new AuthManager()
+
 	const handleLogOut = () => {
 		authManager.removeToken()
 		dispatch(updateStateLoginStatus(false))
 	}
-
 
 	return (
 		<header>

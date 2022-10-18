@@ -1,4 +1,3 @@
-
 import UserLocal from "../UserLocal"
 
 class UserState {

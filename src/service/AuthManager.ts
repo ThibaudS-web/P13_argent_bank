@@ -1,10 +1,5 @@
 import jwtDecode from "jwt-decode"
-
-export interface IAuthManager {
-	removeToken(): void
-	setToken(token: string): void
-	isTokenValid(): Boolean
-}
+import IAuthManager from "./IAuthManager"
 
 class AuthManager implements IAuthManager {
 	private getToken() {
@@ -22,8 +17,8 @@ class AuthManager implements IAuthManager {
 	isTokenValid() {
 		const token = this.getToken()
 		if (token) {
-            const decodedToken: { exp: number; iat: number; id: string } = jwtDecode(token)
-            
+			const decodedToken: { exp: number; iat: number; id: string } = jwtDecode(token)
+
 			const tokenExpireDate = new Date(decodedToken.exp * 1000)
 			const currentDate = new Date()
 

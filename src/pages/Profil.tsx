@@ -1,16 +1,15 @@
 import Account from "../components/Account"
 import { accountText } from "../utils/staticText"
 import { useEffect, SetStateAction } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { getUser } from "../features/user/userSlice"
-import { AppDispatch } from "../app/store"
 import Token from "../models/Token"
 import { userFirstName, userLastName } from "../features/user/selector"
 import { useState } from "react"
 import UserFormName from "../components/UserFormName"
+import { dispatch } from "../utils/hooks"
 
 function Profil() {
-	const dispatch = useDispatch<AppDispatch>()
 	const [isDisplayForm, setIsDisplayForm] = useState(false)
 
 	const firstName = useSelector(userFirstName)

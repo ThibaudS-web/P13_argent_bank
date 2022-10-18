@@ -1,13 +1,10 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import { updateStateLoginStatus } from "../features/user/userSlice"
 import AuthManager from "../service/AuthManager"
 import FetchUser from "../service/FetchUser"
+import { navigate, dispatch } from "../utils/hooks"
 
 function Login() {
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
 	const fetchUser = new FetchUser()
 	const authManager = new AuthManager()
 
@@ -19,8 +16,6 @@ function Login() {
 		if (email && password) {
 			try {
 				const token = await fetchUser.login(email, password)
-				setEmail(null)
-				setPassword(null)
 				authManager.setToken(token.token)
 				dispatch(updateStateLoginStatus(true))
 				navigate("/profile", { replace: true })
