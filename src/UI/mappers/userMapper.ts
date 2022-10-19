@@ -6,7 +6,6 @@ import userLocal from "../../models/UserLocal"
  * UserAPI is our model from api/v1/user/profile.
  */
 
-
 class UserMapper {
 	mapAPI(userAPI: UserAPI): userLocal {
 		return new userLocal(userAPI.email, userAPI.firstName, userAPI.lastName, userAPI.id)
