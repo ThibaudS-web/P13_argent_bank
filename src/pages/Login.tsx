@@ -19,11 +19,11 @@ function Login() {
 		event.preventDefault()
 		if (email && password) {
 			try {
-				const token = await fetchUser.login(email, password)
-				authManager.setToken(token.token)
+				const response = await fetchUser.login(email, password)	
+				authManager.setToken(response.token)
 				dispatch(updateStateLoginStatus(true))
 				navigate("/profile", { replace: true })
-				return token
+				return response
 			} catch (error) {
 				throw new Error("Error on Login page: ", error as Error)
 			}
