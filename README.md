@@ -6,9 +6,9 @@ Argent Bank is an account management application. On this project you will find:
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
 ![librairy-react](https://user-images.githubusercontent.com/66798720/192504809-c9103119-f809-4b46-a0da-9dafc020260f.svg)
-[redux-toolkit](https://user-images.githubusercontent.com/66798720/196624218-2c86193b-a158-4765-96a7-ecd850351564.svg)
+![redux-toolkit](https://user-images.githubusercontent.com/66798720/196624218-2c86193b-a158-4765-96a7-ecd850351564.svg)
 
-Node version : v14.0.0!
+Node version : v14.0.0
 
 
 ## Installation and launching the frontend
