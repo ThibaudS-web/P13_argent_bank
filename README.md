@@ -1,6 +1,8 @@
 # Presentation
 
-Argent Bank is an account management application. On this project you will find: a react application with a state manager (redux-toolkit). A YAML file to document endpoints with the swagger editor.
+Argent Bank is an account management application. On this project you will find: 
+-react application with a state manager (redux-toolkit)
+-YAML file to document endpoints with the swagger editor
 
 ## Project created with:
 
