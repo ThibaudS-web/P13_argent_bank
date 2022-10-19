@@ -6,6 +6,7 @@ import UserMapper from "../../UI/mappers/UserMapper"
 import AuthManager from "../../service/AuthManager"
 import IAuthManager from "../../service/IAuthManager"
 
+
 const fetchUser = new FetchUser()
 const authManager: IAuthManager = new AuthManager()
 

@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage" // defaults to localStorage for 
 const persistConfig = {
 	key: "root",
 	storage,
-	blacklist: ['isConnected', 'loaded']
+	blacklist: ['isConnected']
 }
 
 const persistedReducer = persistReducer(persistConfig, userSlice.reducer)
@@ -15,7 +15,6 @@ const store = configureStore({
 	reducer: {
 		user: persistedReducer
 	},
-
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
