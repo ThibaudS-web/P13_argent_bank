@@ -1,10 +1,10 @@
 import UserLocal from "../UserLocal"
 
 class UserState {
-	isConnected: Boolean
-	loaded: Boolean
+	isConnected: boolean
+	loaded: boolean
 	userInfos: UserLocal | null
-	constructor(loaded: Boolean, userInfos: UserLocal, isConnected: Boolean) {
+	constructor(loaded: boolean, userInfos: UserLocal, isConnected: boolean) {
 		this.isConnected = isConnected
 		this.loaded = loaded
 		this.userInfos = userInfos

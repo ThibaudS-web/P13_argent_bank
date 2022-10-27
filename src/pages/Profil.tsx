@@ -26,6 +26,7 @@ function Profil() {
 	}
 
 	useEffect(() => {
+		console.log(firstName)
 		dispatch(getUser(token))
 	})
 

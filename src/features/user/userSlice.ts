@@ -6,7 +6,6 @@ import UserMapper from "../../UI/mappers/UserMapper"
 import AuthManager from "../../service/AuthManager"
 import IAuthManager from "../../service/IAuthManager"
 
-
 const fetchUser = new FetchUser()
 const authManager: IAuthManager = new AuthManager()
 
@@ -41,7 +40,7 @@ const userSlice = createSlice({
 	},
 	reducers: {
 		updateStateLoginStatus: (state, action) => {
-			const connected: Boolean = action.payload
+			const connected: boolean = action.payload
 			if (connected) {
 				state.isConnected = connected
 			} else {
