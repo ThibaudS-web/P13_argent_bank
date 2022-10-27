@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { AppDispatch } from "../app/store"
 import { getUser } from "../features/user/userSlice"
 import Token from "../models/Token"
-import { userFirstName, userLastName } from "../features/user/selector"
+import { user, userFirstName, userLastName } from "../features/user/selector"
 import { useState } from "react"
 import UserFormName from "../components/UserFormName"
 
@@ -14,6 +14,7 @@ function Profil() {
 	const dispatch = useDispatch<AppDispatch>()
 	const firstName = useSelector(userFirstName)
 	const lastName = useSelector(userLastName)
+	const userInState = useSelector(user)
 
 	let token: Token
 	const tokenInStorage = localStorage.getItem("token")
@@ -26,7 +27,9 @@ function Profil() {
 	}
 
 	useEffect(() => {
-		console.log(firstName)
+		if (userInState) {
+			return
+		}
 		dispatch(getUser(token))
 	})
 
