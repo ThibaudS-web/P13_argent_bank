@@ -186,6 +186,50 @@ paths:
           description: Not found error
         '500':
           description: Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+          - Transactions Module (in progress...)
+      summary: Add a transaction by ID
+      description: API for Add transaction by ID
+      parameters:
+        - in: path
+          name: bankId
+          type: string
+          required: true
+        - in: path
+          name: month
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+        - in: header
+          type: 'string'
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdated'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Transaction updated with success
+        '400': 
+          description: Bad request error
+        '401':
+          description: Unauthorized client error
+        '404':
+          description: Not found error
+        '500':
+          description: Internal Server Error
     put:
       security:
         - Bearer: []
@@ -224,6 +268,44 @@ paths:
           description: Transaction updated with success
           schema:
             $ref: '#/definitions/Transaction'
+        '400': 
+          description: Bad request error
+        '401':
+          description: Unauthorized client error
+        '404':
+          description: Not found error
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module (in progress...)
+      summary: Delete a transaction by ID
+      description: API for delete transaction by ID
+      parameters:
+        - in: path
+          name: bankId
+          type: string
+          required: true
+        - in: path
+          name: month
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+        - in: header
+          type: 'string'
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction deleted with success
         '400': 
           description: Bad request error
         '401':
